@@ -144,16 +144,18 @@ typedef NSFont UIFont;
     }];
     
     /* autodetection */
-    
+
     [defaultParser addLinkDetectionWithLinkFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range, NSString * _Nullable link) {
-        if (!weakParser.skipLinkAttribute) {
-            [attributedString addAttribute:NSLinkAttributeName
-                                     value:[NSURL URLWithString:link]
-                                     range:range];
+        if(!weakParser.shouldSkipLinkDetection) {
+            if (!weakParser.skipLinkAttribute) {
+                [attributedString addAttribute:NSLinkAttributeName
+                                         value:[NSURL URLWithString:link]
+                                         range:range];
+            }
+            [attributedString addAttributes:weakParser.linkAttributes range:range];
         }
-        [attributedString addAttributes:weakParser.linkAttributes range:range];
     }];
-    
+
     /* inline parsing */
     
     [defaultParser addStrongParsingWithFormattingBlock:^(NSMutableAttributedString *attributedString, NSRange range) {

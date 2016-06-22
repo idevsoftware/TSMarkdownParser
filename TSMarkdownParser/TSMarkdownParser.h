@@ -46,6 +46,11 @@ typedef void (^TSMarkdownParserLinkFormattingBlock)(NSMutableAttributedString *a
 @property (nonatomic, assign) BOOL skipLinkAttribute;
 
 /**
+ * Tells the standardParser to skip link detection
+ */
+@property (nonatomic, assign) BOOL shouldSkipLinkDetection;
+
+/**
  Provides the following default parsing rules from below examples:
  * Escaping parsing
  * Code escaping parsing using monospaceAttributes
